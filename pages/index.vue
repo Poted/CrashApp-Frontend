@@ -1,5 +1,5 @@
 <template>
-    <FloatingButton class="m-24"/>
+    <!-- <FloatingButton class="m-24"/> -->
     <div class="landing-page p-0">
         <section class="hero flex flex-col">
             <div class="container dark-box flex flex-col items-center justify-center ">

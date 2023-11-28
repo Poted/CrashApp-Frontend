@@ -1,9 +1,27 @@
 <template>
     <div class="floating-component">
         <div class="floating-point justify-end">
-            <nuxt-link :to="'/'">
-                <img @click="scrollToTop" ref="image" :src="blobUrl" @load="loaded" />
-            </nuxt-link>
+
+            <div class="circle-container">
+                <img ref="image" @click="showOptions" :src="blobUrl" @load="loaded" />
+                <div class="circle">
+                    <transition name="bounce">
+                        <div v-if="showContent" class="elements">
+
+                            <div v-for="(item, index) in iconNames" :key="index" class="circle-item"
+                                :style="getItemStyle(index)">
+
+                                <nuxt-link :to="getIconHref(item.src)">
+                                    <img :src="getIconSrc(item.name)" alt="i">
+                                </nuxt-link>
+
+                            </div>
+
+                        </div>
+                    </transition>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>
@@ -12,15 +30,28 @@
 import axios from "axios"
 
 export default {
-
     data() {
-        const { file_id } = useRoute().params;
         return {
-            blobUrl: ('http://localhost:80/getFile/' + 'b03767fd-a361-47e3-912a-3d386f31ec8d'),
-        }
-    },
 
+            blobUrl: ('http://localhost:80/getFile/' + 'b03767fd-a361-47e3-912a-3d386f31ec8d'),
+
+
+            iconNames: [
+                {name: 'home', src: ''},
+                {name: 'boulder', src: 'findYourCrashpad'},
+                {name: 'cloud', src: 'strg'},
+                {name: 'msg', src: 'contact'}, 
+                {name: 'some', src: ''},
+                {name: 'xd', src: ''}
+            ],
+
+            // items: ['1', '2'],
+            items: [, '2', '3', '4', '5', '6'],
+            showContent: false
+        };
+    },
     methods: {
+
         async getData() {
             try {
                 const response = await axios.get(`http://localhost:80/getFileData/` + this.data.id);
@@ -43,27 +74,73 @@ export default {
                 behavior: 'smooth',
             });
         },
-    }
+
+        getItemStyle(index) {
+            const totalItems = this.items.length;
+            const angle = (360 / totalItems) * index - 22;
+            // const angle = (360 / totalItems) * index;
+            const radius = '100px';
+            const position = calculatePosition(angle, radius);
+            return {
+                left: position.x,
+                top: position.y,
+            };
+        },
+
+        showOptions() {
+            this.showContent = !this.showContent
+        },
+
+        getIconSrc(iconName) {
+            return `/${iconName}.ico`;
+        },
+        
+        getIconHref(href) {
+            return `/${href}`;
+        },
+
+    },
+
+    mounted() {
+
+        this.$nextTick(() => {
+            setTimeout(() => {
+                this.animate = true;
+            }, 2000);
+        });
+
+    },
+
 }
+
+function calculatePosition(angle, radius) {
+    const radians = (angle * Math.PI) / 450;
+    console.log(radians)
+
+    const x = Math.cos(radians) * parseInt(radius);
+    const y = Math.sin(radians) * parseInt(radius);
+    return { x: `${x}px`, y: `${y}px` };
+}
+
 </script>
 
 <style scoped lang="scss">
 .floating-component {
-    position: fixed;
+
     top: 0;
     left: 0;
     width: 100%;
     height: 0.5px;
     align-items: center;
-    // background-color: #333;
-    // color: white;
     padding: 10px;
-    z-index: 1000;
+
+
 
     .floating-point {
         margin: 0 0 0 -1vw;
-        // background-color: aqua;
         width: 8vw;
+        position: fixed;
+
 
         // @media screen and (max-width: 646px) {
         //     margin: 85vh 0 0 0;
@@ -82,7 +159,89 @@ export default {
         @media (min-width: 768px) and (max-width: 1199px) {
             width: 12vw;
         }
+
+
+        .circle-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+
+            img {
+                z-index: 10;
+                position: relative;
+            }
+
+            .circle {
+
+                position: relative;
+                background-color: #f0f0f0;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                height: 1px;
+                width: 1px;
+                top: -4.7rem;
+                left: -1rem;
+
+                .circle-item {
+                    position: absolute;
+                    width: 40px;
+                    height: 40px;
+                    background-color: #3498db;
+                    color: #ffffff;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    overflow: hidden;
+
+                    img {
+                        width: 2rem;
+                    }
+
+                }
+
+                .circle-item span {
+                    display: inline-block;
+                    text-align: center;
+                }
+
+                .bounce-enter-active {
+                    animation: bounce-in .4s;
+                }
+
+                .bounce-leave-active {
+                    animation: bounce-in .4s reverse;
+                }
+
+                @keyframes bounce-in {
+                    0% {
+                        transform: scale(0);
+                    }
+
+                    50% {
+                        transform: scale(1.5);
+                    }
+
+                    100% {
+                        transform: scale(1);
+                    }
+                }
+
+
+
+
+            }
+
+        }
     }
+
+
+
 
 
 }

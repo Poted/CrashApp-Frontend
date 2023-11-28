@@ -1,6 +1,11 @@
 <template>
     <div>
-      <FloatingPointer />
+      
+      <!-- <FloatingButton /> -->
+      <FloatingPointer/>
+      <!-- </FloatingPointer> -->
+      
+      <!-- </FloatingPointer> -->
         <slot></slot>
       <!-- <nuxt /> -->
       <!-- <Footer /> -->
@@ -9,6 +14,8 @@
   
   <script>
   import FloatingPointer from '../components/floatingPointer.vue';
+// import { FloatingButton } from '../components/floatingButton.vue';
+
 //   import Footer from '~/components/Footer.vue';
   
   export default {

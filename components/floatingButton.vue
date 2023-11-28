@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       // items: ['1', '2', '3', '4', '5'],
-      items: ['1', '2', '3', '4', '5', '6', '7'],
+      items: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
       showContent: false
     };
   },
@@ -28,7 +28,8 @@ export default {
 
     getItemStyle(index) {
       const totalItems = this.items.length;
-      const angle = (360 / totalItems) * index;
+      const angle = (360 / totalItems) * index - 45;
+      // const angle = (360 / totalItems) * index;
       const radius = '100px';
       const position = calculatePosition(angle, radius);
       return {
@@ -45,8 +46,9 @@ export default {
 };
 
 function calculatePosition(angle, radius) {
-  const radians = (angle * Math.PI) / 180;
-  // console.log(radians)
+  const radians = (angle * Math.PI) / 450;
+  console.log(radians)
+
   const x = Math.cos(radians) * parseInt(radius);
   const y = Math.sin(radians) * parseInt(radius);
   return { x: `${x}px`, y: `${y}px` };
@@ -56,16 +58,18 @@ function calculatePosition(angle, radius) {
 
 <style scoped>
 .circle-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  /* display: flex;
+  align-items: center; */
+  /* justify-content: center; */
+  /* height: inherit; */
+  height: 100px;
+  width: 100px;
 }
 
 .circle {
-  position: relative;
-  width: 1px;
-  height: 1px;
+  /* position: relative; */
+  width: 100px;
+  height: 100px;
   background-color: #f0f0f0;
   border-radius: 50%;
   display: flex;
