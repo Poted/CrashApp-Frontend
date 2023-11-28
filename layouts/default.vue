@@ -2,7 +2,7 @@
     <div>
       
       <!-- <FloatingButton /> -->
-      <FloatingPointer/>
+      <FloatingPointer class="absolute"/>
       <!-- </FloatingPointer> -->
       
       <!-- </FloatingPointer> -->

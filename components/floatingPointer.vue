@@ -37,12 +37,12 @@ export default {
 
 
             iconNames: [
-                {name: 'home', src: ''},
-                {name: 'boulder', src: 'findYourCrashpad'},
-                {name: 'cloud', src: 'strg'},
-                {name: 'msg', src: 'contact'}, 
-                {name: 'some', src: ''},
-                {name: 'xd', src: ''}
+                { name: 'home', src: '' },
+                { name: 'boulder', src: 'findYourCrashpad' },
+                { name: 'cloud', src: 'strg' },
+                { name: 'msg', src: 'contact' },
+                { name: 'some', src: '' },
+                { name: 'xd', src: '' }
             ],
 
             // items: ['1', '2'],
@@ -94,7 +94,7 @@ export default {
         getIconSrc(iconName) {
             return `/${iconName}.ico`;
         },
-        
+
         getIconHref(href) {
             return `/${href}`;
         },
@@ -136,10 +136,13 @@ function calculatePosition(angle, radius) {
 
 
 
+
     .floating-point {
-        margin: 0 0 0 -1vw;
+        margin: 0 0 0 1vw;
         width: 8vw;
         position: fixed;
+        border-radius: 50%;
+
 
 
         // @media screen and (max-width: 646px) {
@@ -171,6 +174,8 @@ function calculatePosition(angle, radius) {
             img {
                 z-index: 10;
                 position: relative;
+                cursor: pointer;
+
             }
 
             .circle {
@@ -181,13 +186,16 @@ function calculatePosition(angle, radius) {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                cursor: pointer;
                 height: 1px;
                 width: 1px;
                 top: -4.7rem;
                 left: -1rem;
+                box-shadow: 15px 12px 70px 15px #3498db;
+
 
                 .circle-item {
+                    box-shadow: -3px -3px 20px -10px #3498db;
+                    border: 2px rgb(15, 55, 61) solid;
                     position: absolute;
                     width: 40px;
                     height: 40px;
@@ -199,8 +207,9 @@ function calculatePosition(angle, radius) {
                     justify-content: center;
                     overflow: hidden;
 
+
                     img {
-                        width: 2rem;
+                        width: 1.8rem;
                     }
 
                 }
