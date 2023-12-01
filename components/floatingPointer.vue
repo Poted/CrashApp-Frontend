@@ -11,7 +11,7 @@
                             <div v-for="(item, index) in iconNames" :key="index" class="circle-item"
                                 :style="getItemStyle(index)">
 
-                                <nuxt-link :to="getIconHref(item.src)">
+                                <nuxt-link @click="showContent = !showContent" :to="getIconHref(item.src)">
                                     <img :src="getIconSrc(item.name)" alt="i">
                                 </nuxt-link>
 
@@ -109,6 +109,10 @@ export default {
             }, 2000);
         });
 
+   
+        // const currentUrl = window.location.href;
+        // console.log(currentUrl);
+
     },
 
 }
@@ -133,7 +137,7 @@ function calculatePosition(angle, radius) {
     height: 0.5px;
     align-items: center;
     padding: 10px;
-
+    z-index: 20;
 
 
 

@@ -21,7 +21,7 @@ export default {
   
   <style scoped>
   .btn-shine {
-    /* position: relative; */
+    position: relative;
     margin: 0;
     padding: 17px 35px;
     outline: none;

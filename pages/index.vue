@@ -1,13 +1,18 @@
 <template>
-    <!-- <FloatingButton class="m-24"/> -->
     <div class="landing-page p-0">
         <section class="hero flex flex-col">
             <div class="container dark-box flex flex-col items-center justify-center ">
-                <h1 class="text-7xl font-bold text-center m-8">CrashApp</h1>
-                <p class="text-5xl text-center text-gray-500 mb-32" style="font-stretch: extra-expanded;">Your one-stop shop for all things bouldering.</p>
-                <nuxt-link :to="'/findYourCrashpad'">
-                    <ShineButton text="Find yourself a crashpad"/>
+                <h1 class="text-5xl font-bold text-center m-2">CrashApp</h1>
+                <p class="text-lg text-center text-gray-500 mb-32">Your one-stop shop for all things bouldering.</p>
+                <a href="/findYourCrashpad"><ShineButton class="m-2" text="Find yourself a crashpad"/></a>
+                <!-- <nuxt-link to="/findYourCrashpad" exact><ShineButton class="m-2" text="Find yourself a crashpad"/></nuxt-link> -->
+                <!-- <nuxt-link :to="'/findYourCrashpad'"><ShineButton class="m-2" text="Find yourself a crashpad"/></nuxt-link> -->
+                <!-- <nuxt-link :to="'/findYourCrashpad'">
+                    <ShineButton class="m-2" text="Find yourself a crashpad"/>
                 </nuxt-link>
+                <nuxt-link :to="'/findYourCrashpad'">
+                    <ShineButton class="m-2" text="Find yourself a crashpad"/>
+                </nuxt-link> -->
             </div>
         </section>
 
