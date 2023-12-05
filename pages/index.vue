@@ -1,18 +1,55 @@
 <template>
     <div class="landing-page p-0">
+
+
+        <section class="call-to-action">
+            <div class="container dark-box mx-auto flex flex-col items-center justify-center h-screen">
+
+                <div class="main-text" :class="{ 'fade-out': isChanged }" @click="changeContent">
+                    <h2 class="text-5xl font-bold text-center">Get started today!</h2>
+                    <p class="text-lg text-center text-gray-500">Find the stuff you like and start climbing</p>
+                    <h1 class="text-center">
+                        the way you like.
+                    </h1>
+                </div>
+
+                <div class="items grid grid-cols-3 gap-2 sm:gap-8" :class="{ 'show-items': isChanged }">
+                    <div class="item white-box">
+                        <h1>Bouldering</h1>
+                        <img src="blob:url" alt="">
+                    </div>
+                    <div class="item white-box">
+                        <h1>Bouldering</h1>
+                        <img src="blob:url" alt="">
+                    </div>
+                    <div class="item white-box">
+                        <h1>Bouldering</h1>
+                        <img src="blob:url" alt="">
+                    </div>
+                    <div class="item white-box">
+                        <h1>Bouldering</h1>
+                        <img src="blob:url" alt="">
+                    </div>
+                    <div class="item white-box">
+                        <h1>Bouldering</h1>
+                        <img src="blob:url" alt="">
+                    </div>
+                    <div class="item white-box">
+                        <h1>Bouldering</h1>
+                        <img src="blob:url" alt="">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <section class="hero flex flex-col">
             <div class="container dark-box flex flex-col items-center justify-center ">
                 <h1 class="text-5xl font-bold text-center m-2">CrashApp</h1>
                 <p class="text-lg text-center text-gray-500 mb-32">Your one-stop shop for all things bouldering.</p>
-                <a href="/findYourCrashpad"><ShineButton class="m-2" text="Find yourself a crashpad"/></a>
-                <!-- <nuxt-link to="/findYourCrashpad" exact><ShineButton class="m-2" text="Find yourself a crashpad"/></nuxt-link> -->
-                <!-- <nuxt-link :to="'/findYourCrashpad'"><ShineButton class="m-2" text="Find yourself a crashpad"/></nuxt-link> -->
-                <!-- <nuxt-link :to="'/findYourCrashpad'">
-                    <ShineButton class="m-2" text="Find yourself a crashpad"/>
-                </nuxt-link>
-                <nuxt-link :to="'/findYourCrashpad'">
-                    <ShineButton class="m-2" text="Find yourself a crashpad"/>
-                </nuxt-link> -->
+                <a href="/findYourCrashpad">
+                    <ShineButton class="m-2" text="Find yourself a crashpad" />
+                </a>
             </div>
         </section>
 
@@ -52,67 +89,166 @@
             </div>
         </section>
 
-        <section class="call-to-action">
-            <div class="container dark-box mx-auto flex flex-col items-center justify-center h-screen">
-                <h2 class="text-5xl font-bold text-center">Get started today!</h2>
-                <p class="text-lg text-center text-gray-500">Sign up for a free account and start climbing.</p>
-                <a href="/register" class="btn btn-primary">Sign Up</a>
-            </div>
-        </section>
     </div>
 </template>
+
+<script>
+
+export default {
+    data() {
+        return {
+            isChanged: false,
+        }
+    },
+    methods: {
+        changeContent() {
+
+            this.isChanged = !this.isChanged;
+        },
+    },
+
+}
+</script>
   
 <style lang="scss">
 
 .dark-box {
-        background-color: rgb(40, 40, 40, 0.9);
-        border-radius: 20px;
-        border: 2px violet solid;
-        margin: 5vh 0vw 5vh 0vw;
-        box-shadow: -30px 40px 45px rgba(0, 0, 0, 1);
-        color: ghostwhite;
-        overflow: hidden;
+    background-color: rgb(40, 40, 40, 0.9);
+    border-radius: 20px;
+    border: 2px violet solid;
+    margin: 5vh 0vw 5vh 0vw;
+    box-shadow: -30px 40px 45px rgba(0, 0, 0, 1);
+    color: ghostwhite;
+    overflow: hidden;
 
 
-        @media screen and (max-width: 467px) { 
-            width: 98vw;
-            box-shadow: 0 0 0 black;
-        }
+    @media screen and (max-width: 467px) {
+        width: 98vw;
+        box-shadow: 0 0 0 black;
+    }
+}
+
+.white-box {
+    background-color: rgba(14, 14, 14, 0.9);
+    border-radius: 20px;
+    border: 2px ghostwhite solid;
+    margin: 5vh 0vw 5vh 0vw;
+    box-shadow: 0px 0px 10px 0px rgb(110, 100, 100);
+    color: ghostwhite;
+    overflow: hidden;
+
+
+    @media screen and (max-width: 467px) {
+        width: 98vw;
+        box-shadow: 0 0 0 black;
+    }
 }
 
 
 .landing-page {
 
-    // align-items: center;
-    .hero {
-            
+    .call-to-action {
+
+        color: #fff;
+
+        .container {
+
+            .main-text {
+                cursor: pointer;
+                position: absolute;
+            }
+
+            .fade-out {
+                animation: fadeOut 1s ease-out;
+                visibility: hidden;
+
+                @keyframes fadeOut {
+                    from {
+                        visibility: visible;
+                    }
+
+                    to {
+                        opacity: 0;
+                        color: violet;
+                        font-size: xx-large;
+                    }
+                }
+            }
+
+
+            .items {
+                opacity: 0.9;
+                border-radius: 10px;
+                visibility: hidden;
+                justify-content: space-around;
+                
+                
+
+
+                .item {
+                    text-align: center;
+                    border-radius: 10px;
+                    margin: inherit;
+                    height: 100%;
+                    width: 100%;
+                    padding: 2vw;
+                }
+
+
+            }
+
+            .show-items {
+                // animation: showItems 20s ease-out;
+                visibility: visible;
+                animation: placeItems .4s alternate;
+                width: 96%;
+                height: 89%;
+
+                @keyframes placeItems {
+                    from {
+                        width: 0px;
+                        height: 95%;
+                        font-size: 0px;
+                        margin: 0;
+                    }
+
+                    to {
+                    }
+
+                }
+
+                @keyframes showItems {
+                    from {
+                        visibility: hidden;
+                        opacity: 0;
+                    }
+
+                    to {
+                        visibility: visible;
+                    }
+                }
+
+            }
+
+
+        }
+
     }
-    
+
+    .hero {}
+
     .container {
         height: 90vh;
 
     }
 
-    .features {
-        // padding: 2rem;
-    }
+    .features {}
 
-    .testimonials {
-        // padding: 2rem;
-    }
+    .testimonials {}
 
-    .call-to-action {
-        background-color: transparent;
-        color: #fff;
-    }
+
 
 }
-@media (min-width: 1200px) {
-    body {
-        background-position-y: -125px;
-    }
-}
-
 
 
 body {

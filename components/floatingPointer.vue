@@ -259,4 +259,3 @@ function calculatePosition(angle, radius) {
 
 }
 </style>
-  
