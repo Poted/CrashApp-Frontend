@@ -5,6 +5,60 @@
             <div class="circle-container">
                 <img ref="image" @click="showOptions" :src="blobUrl" @load="loaded" />
                 <div class="circle">
+
+
+                    <transition name="bounce" @after-enter="startButtonAnimation">
+                        <div v-if="showContent" class="elements">
+
+                            <!-- <ItalicSearchBar v-if="isFirstItem" :animated="buttonAnimated" /> -->
+
+                            <div v-for="(item, index) in iconNames" :key="index" class="circle-item"
+                                :style="getItemStyle(index)">
+
+                                <template v-if="index == 0">
+                                    <nuxt-link @click="showContent = !showContent" :to="getIconHref(item.src)">
+                                        <img :src="getIconSrc(item.name)" alt="i">
+                                    </nuxt-link>
+                                    <div>
+                                        <ItalicSearchBar :animated="buttonAnimated" class="isb" />
+                                    </div>
+                                </template>
+                                <template v-else-if="item.name == 'facebook'">
+                                    <a @click="showContent = !showContent" href="https://www.facebook.com/" target="_blank">
+                                        <img :src="getIconSrc(item.name)" alt="i">
+                                    </a>
+                                </template>
+                                <template v-else-if="item.name == 'instagram'">
+                                    <a @click="showContent = !showContent" href="https://www.instagram.com/"
+                                        target="_blank">
+                                        <img :src="getIconSrc(item.name)" alt="i">
+                                    </a>
+                                </template>
+                                <template v-else>
+                                    <nuxt-link @click="showContent = !showContent" :to="getIconHref(item.src)">
+                                        <img :src="getIconSrc(item.name)" alt="i">
+                                    </nuxt-link>
+                                </template>
+
+                            </div>
+
+                        </div>
+                    </transition>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- <ItalicSearchBar class="w-96"/> -->
+                    <!-- 
                     <transition name="bounce">
                         <div v-if="showContent" class="elements">
 
@@ -18,7 +72,7 @@
                             </div>
 
                         </div>
-                    </transition>
+                    </transition> -->
                 </div>
             </div>
 
@@ -41,15 +95,17 @@ export default {
                 { name: 'boulder', src: 'findYourCrashpad' },
                 { name: 'cloud', src: 'strg' },
                 { name: 'msg', src: 'contact' },
-                { name: 'some', src: '' },
-                { name: 'xd', src: '' }
+                { name: 'facebook' },
+                { name: 'instagram' }
             ],
 
-            // items: ['1', '2'],
             items: [, '2', '3', '4', '5', '6'],
-            showContent: false
+            showContent: false,
+            buttonAnimated: false,
+
         };
     },
+
     methods: {
 
         async getData() {
@@ -99,6 +155,10 @@ export default {
             return `/${href}`;
         },
 
+        startButtonAnimation() {
+            this.buttonAnimated = true;
+        },
+
     },
 
     mounted() {
@@ -109,7 +169,7 @@ export default {
             }, 2000);
         });
 
-   
+
         // const currentUrl = window.location.href;
         // console.log(currentUrl);
 
@@ -214,6 +274,18 @@ function calculatePosition(angle, radius) {
 
                     img {
                         width: 1.8rem;
+                    }
+
+                    .isb {
+                        position: fixed;
+                        width: 27.5vw !important;
+                        margin: 0vh 0 0 5vw;
+
+                        @media screen and (max-width: 646px) {
+                            width: 100% !important;
+                            margin: 20vh 0 0 -35vw;
+                        }
+
                     }
 
                 }

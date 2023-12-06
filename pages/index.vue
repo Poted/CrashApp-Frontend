@@ -14,28 +14,40 @@
                 </div>
 
                 <div class="items grid grid-cols-3 gap-2 sm:gap-8" :class="{ 'show-items': isChanged }">
+
+                    <div class="item white-box bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                        <h1>CrashRent</h1>
+                        <img src="blob:url" alt="">
+                    </div>
+
+                    <div  v-for="photo in photosData" :key="photo.id">
+
+                        <div class="item white-box">
+                        <h1>Crashpads</h1>
+                        <img src="blob:url" alt="">
+                    </div>    
+                        
+                    </div>
+
+                    
                     <div class="item white-box">
-                        <h1>Bouldering</h1>
+                        <h1>Chalkbags</h1>
                         <img src="blob:url" alt="">
                     </div>
                     <div class="item white-box">
-                        <h1>Bouldering</h1>
+                        <h1>Chalk</h1>
                         <img src="blob:url" alt="">
                     </div>
                     <div class="item white-box">
-                        <h1>Bouldering</h1>
+                        <h1>Climbing<br>Brushes</h1>
                         <img src="blob:url" alt="">
                     </div>
                     <div class="item white-box">
-                        <h1>Bouldering</h1>
+                        <h1>Bouldering<br>Crashpads</h1>
                         <img src="blob:url" alt="">
                     </div>
                     <div class="item white-box">
-                        <h1>Bouldering</h1>
-                        <img src="blob:url" alt="">
-                    </div>
-                    <div class="item white-box">
-                        <h1>Bouldering</h1>
+                        <h1>Climbing<br>Shoes</h1>
                         <img src="blob:url" alt="">
                     </div>
                 </div>
@@ -98,6 +110,8 @@ export default {
     data() {
         return {
             isChanged: false,
+            photosData: [],
+            blobUrl: ('http://localhost:80/getFile/'),
         }
     },
     methods: {
@@ -112,37 +126,37 @@ export default {
   
 <style lang="scss">
 
-.dark-box {
-    background-color: rgb(40, 40, 40, 0.9);
-    border-radius: 20px;
-    border: 2px violet solid;
-    margin: 5vh 0vw 5vh 0vw;
-    box-shadow: -30px 40px 45px rgba(0, 0, 0, 1);
-    color: ghostwhite;
-    overflow: hidden;
+// .dark-box {
+//     background-color: rgb(40, 40, 40, 0.9);
+//     border-radius: 20px;
+//     border: 2px violet solid;
+//     margin: 5vh 0vw 5vh 0vw;
+//     box-shadow: -30px 40px 45px rgba(0, 0, 0, 1);
+//     color: ghostwhite;
+//     overflow: hidden;
 
 
-    @media screen and (max-width: 467px) {
-        width: 98vw;
-        box-shadow: 0 0 0 black;
-    }
-}
+//     @media screen and (max-width: 467px) {
+//         width: 98vw;
+//         box-shadow: 0 0 0 black;
+//     }
+// }
 
-.white-box {
-    background-color: rgba(14, 14, 14, 0.9);
-    border-radius: 20px;
-    border: 2px ghostwhite solid;
-    margin: 5vh 0vw 5vh 0vw;
-    box-shadow: 0px 0px 10px 0px rgb(110, 100, 100);
-    color: ghostwhite;
-    overflow: hidden;
+// .white-box {
+//     background-color: rgba(14, 14, 14, 0.9);
+//     border-radius: 20px;
+//     border: 2px ghostwhite solid;
+//     margin: 5vh 0vw 5vh 0vw;
+//     box-shadow: 0px 0px 10px 0px rgb(110, 100, 100);
+//     color: ghostwhite;
+//     overflow: hidden;
 
 
-    @media screen and (max-width: 467px) {
-        width: 98vw;
-        box-shadow: 0 0 0 black;
-    }
-}
+//     @media screen and (max-width: 467px) {
+//         width: 98vw;
+//         box-shadow: 0 0 0 black;
+//     }
+// }
 
 
 .landing-page {
@@ -181,8 +195,8 @@ export default {
                 border-radius: 10px;
                 visibility: hidden;
                 justify-content: space-around;
-                
-                
+
+
 
 
                 .item {
@@ -191,7 +205,24 @@ export default {
                     margin: inherit;
                     height: 100%;
                     width: 100%;
-                    padding: 2vw;
+                    padding: 1vw;
+                    cursor: pointer;
+
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+
+                    h1 {
+                        position: absolute;
+                    }
+
+                    // img {
+                    //     width: 100%;
+                    //     height: 100%;
+                    //     position: relative;
+                    //     border-radius: 10px;
+                    // }
                 }
 
 
@@ -212,8 +243,7 @@ export default {
                         margin: 0;
                     }
 
-                    to {
-                    }
+                    to {}
 
                 }
 

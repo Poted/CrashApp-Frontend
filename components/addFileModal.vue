@@ -1,6 +1,6 @@
 <template>
-  <div class="modal" v-if="showModal">
-    <div class="modal-content rounded-xl ">
+  <div class="modal flex flex-col items-center" v-if="showModal">
+    <div class="modal-content rounded-xl m-24" @keydown.esc="closeModal">
       <span class="close" @click="closeModal">&times;</span>
 
       <div class="flex flex-col items-center mt-6">
@@ -115,17 +115,20 @@ export default {
 
     openModal() {
       this.showModal = true;
+      document.addEventListener('keydown', this.closeModalOnEscape);
     },
 
     closeModal() {
       this.showModal = false;
       this.selectedFile = null;
+      document.removeEventListener('keydown', this.closeModalOnEscape);
     },
 
-    test() {
-      console.log("test")
-
-    }
+    closeModalOnEscape(event) {
+      if (event.key === 'Escape') {
+        this.closeModal();
+      }
+    },
 
   },
 
@@ -165,7 +168,7 @@ export default {
 
 .modal-content {
   background-color: #fefefe;
-  margin: 10% auto;
+  /* margin: 8% auto; */
   padding: 20px;
   border: 1px solid #888;
   width: 80%;

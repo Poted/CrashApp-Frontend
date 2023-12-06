@@ -1,0 +1,81 @@
+<template>
+  <div class="inputGroup">
+    <input type="text" required autocomplete="off" v-model="inputValue" @focus="isFocused = true"
+      @blur="isFocused = false" @input="emitInputValue"  @change="emitEventChanged"/>
+    <label :for="labelFor" :class="{ 'labelActive': isFocused || inputValue }">{{ label }}</label>
+  </div>
+</template>
+  
+<script>
+export default {
+  data() {
+    return {
+      inputValue: '',
+      isFocused: false,
+      label: "Name",
+      labelFor: "name", // Make sure to match the input's id
+    };
+  },
+
+  props: {
+    value: String,
+  },
+
+  methods: {
+    emitInputValue() {
+      this.$emit('input', this.inputValue);
+      console.log(this.inputValue)
+      return this.inputValue
+    },
+
+    emitEventChanged () {
+                this.$emit('CustomEventInputChanged', this.inputValue);
+            }
+  },
+
+};
+</script>
+  
+<style scoped>
+.inputGroup {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 1em 0 1em 0;
+  max-width: 190px;
+  position: relative;
+}
+
+.inputGroup input {
+  font-size: 100%;
+  padding: 0.8em;
+  outline: none;
+  border: 2px solid rgb(200, 200, 200);
+  background-color: transparent;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.inputGroup label {
+  font-size: 100%;
+  position: absolute;
+  left: 0;
+  padding: 0.8em;
+  margin-left: 0.5em;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  color: rgb(100, 100, 100);
+}
+
+.inputGroup .labelActive {
+  transform: translateY(-50%) scale(.9);
+  margin: 0em;
+  margin-left: 1.3em;
+  padding: 0.4em;
+  background-color: #e8e8e8;
+}
+
+.inputGroup input:focus,
+.inputGroup input:valid {
+  border-color: rgb(150, 150, 200);
+}
+</style>
+  

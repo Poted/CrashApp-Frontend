@@ -1,8 +1,13 @@
 <template>
     <div class="flex flex-col items-center">
 
-        <ShineButton class="mt-12" @click="openModal" text="Upload Photo" />
-        <PhotoUploadModal ref="addFileModal" />
+        <div class="buttons flex flex-row">
+            <ShineButton class="sm:mt-24 mt-32 sm:-mb-10 m-3" @click="openModal" text="Upload Photo" />
+            <PhotoUploadModal ref="addFileModal" />
+            
+            <ShineButton class="sm:mt-24 mt-32 sm:-mb-10 m-3" @click="openFolderModal" text="⠀⠀⠀Folder⠀⠀⠀" />
+            <FolderUploadModal ref="addFolderModal" />
+        </div>
 
         <NoData class="noDataStrg" v-if="photosData === 0" />
         <div v-else class="grid grid-cols-2 sm:grid-cols-4 gap-1 sm:gap-4 m-4 p-0 sm:p-10">
@@ -40,6 +45,7 @@
 <script>
 import axios from "axios"
 import PhotoUploadModal from '@/components/addFileModal.vue';
+import FolderUploadModal from '@/components/addFolderModal.vue';
 
 
 
@@ -90,10 +96,16 @@ export default {
             this.$refs.addFileModal.openModal()
         },
 
+        
+        openFolderModal() {
+            this.$refs.addFolderModal.openFolderModal()
+        },
+
     },
 
     components: {
         PhotoUploadModal,
+        FolderUploadModal,
     },
 
     mounted() {
