@@ -1,11 +1,14 @@
 <template>
     <div class="flex flex-col items-center">
 
-        <div class="buttons flex flex-row">
-            <ShineButton class="sm:mt-24 mt-32 sm:-mb-10 m-3" @click="openModal" text="Upload Photo" />
+        <div class="buttons flex">
+        <!-- <div class="buttons grid gap-3 grid-cols-"> -->
+            <ShineButton class="flex-1 sm:mt-24 mt-32 sm:-mb-10 m-3" 
+                                @click="openModal" text="Upload Photo" />
             <PhotoUploadModal ref="addFileModal" />
             
-            <ShineButton class="sm:mt-24 mt-32 sm:-mb-10 m-3" @click="openFolderModal" text="⠀⠀⠀Folder⠀⠀⠀" />
+            <ShineButton class="flex-1 text-right w-48 sm:mt-24 mt-32 sm:-mb-10 m-3"
+                                @click="openFolderModal" text="Folders" />
             <FolderUploadModal ref="addFolderModal" />
         </div>
 
@@ -122,9 +125,17 @@ export default {
 .content {
     background-color: rgb(40, 40, 40, 0.8);
 
+    
     img {
         max-height: 500px;
     }
+}
+
+.buttons {   
+        button {
+            min-height: 100%;
+            width: 100%;
+        }
 }
 
 .noDataStrg {

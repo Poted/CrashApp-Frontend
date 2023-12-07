@@ -1,36 +1,35 @@
 <template>
   <div class="inputGroup">
-    <input type="text" required autocomplete="off" v-model="inputValue" @focus="isFocused = true"
-      @blur="isFocused = false" @input="emitInputValue"  @change="emitEventChanged"/>
+    <input type="text" required autocomplete="off" :value="inputValue"  @focus="isFocused = true"
+      @blur="isFocused = false" @input="updateInputValue" />
     <label :for="labelFor" :class="{ 'labelActive': isFocused || inputValue }">{{ label }}</label>
   </div>
 </template>
   
 <script>
 export default {
+  props: ['value'],
+
   data() {
     return {
-      inputValue: '',
+      inputValue: this.value || '',
       isFocused: false,
       label: "Name",
       labelFor: "name", // Make sure to match the input's id
     };
   },
 
-  props: {
-    value: String,
-  },
+
 
   methods: {
-    emitInputValue() {
+    // emitInputValue(event) {
+    //   console.log(this.inputValue)
+    //   this.$emit('input', this.inputValue);
+    // },
+    updateInputValue(event) {
+      this.inputValue = event.target.value;
       this.$emit('input', this.inputValue);
-      console.log(this.inputValue)
-      return this.inputValue
     },
-
-    emitEventChanged () {
-                this.$emit('CustomEventInputChanged', this.inputValue);
-            }
   },
 
 };

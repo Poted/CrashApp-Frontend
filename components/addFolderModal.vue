@@ -9,9 +9,11 @@
       </div> -->
 
       <div class="input-fields flex items-center w-full justify-around gap-4">
-        <InputField v-model="inputFields" @CustomEventInputChanged="doSomenthing" />
+        <InputField v-model="inputFields" @input="handleDataFromInput" />
+        <!-- <InputField  @input="handleDataFromInput" /> -->
+        <!-- <InputField @input="$refs." /> -->
         
-        <p>Value in ParentComponent: {{ doSomenthing  }}</p>
+        <p>Value in ParentComponent: {{ this.inputFields.data  }}</p>
         <!-- <p>Value in ParentComponent: {{ this.$refs.inpField }}</p> -->
         
         
@@ -38,8 +40,8 @@ export default {
   data() {
     return {
       showFolderModal: false,
-      // inputFields: '?sdsa',
-      // inputValueFromChild: '',
+      inputValue: '',
+      inputFields: '',
 
       photosData: [],
       blobUrl: ('http://localhost:80/getFile/'),
@@ -48,6 +50,16 @@ export default {
 
   methods: {
 
+    handleDataFromInput(data) {
+      // console.log(data)
+      this.inputFields = data;
+      console.log("W", this.inputFields)
+    },
+
+    // emitInputValue(event) {
+    //   console.log(this.inputValue)
+    //   this.$emit('input', this.inputValue);
+    // },
 
     async getPhotosData() {
       try {
@@ -83,13 +95,13 @@ export default {
       }
     },
 
-    updateInputValue(value) {
-      this.$refs.emitInputValue = value;
-    },
+    // updateInputValue(value) {
+    //   this.$refs.emitInputValue = value;
+    // },
 
-    getInputValue() {
-      this.inputFields = this.inputFields.emitInputValue;
-    },
+    // getInputValue() {
+    //   this.inputFields = this.inputFields.emitInputValue;
+    // },
 
   },
 
