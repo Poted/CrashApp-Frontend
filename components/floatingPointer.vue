@@ -3,7 +3,8 @@
         <div class="floating-point justify-end">
 
             <div class="circle-container">
-                <img ref="image" @click="showOptions" :src="blobUrl" @load="loaded" />
+                <img ref="image" @click="showOptions" src="../public/CrashAppLogo.png" @load="loaded" />
+                <!-- <img ref="image" @click="showOptions" :src="blobUrl" @load="loaded" /> -->
                 <div class="circle">
 
 
@@ -87,8 +88,10 @@ export default {
     data() {
         return {
 
-            blobUrl: ('http://localhost:80/getFile/' + 'b03767fd-a361-47e3-912a-3d386f31ec8d'),
-
+            // blobUrl: ('http://localhost:80/getFile/' + 'b03767fd-a361-47e3-912a-3d386f31ec8d'),
+            // blobUrl: ("../public/1328245.jpeg"),
+    // background-image: url(../public/1328245.jpeg);
+            
 
             iconNames: [
                 { name: 'home', src: '' },

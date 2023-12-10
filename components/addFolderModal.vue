@@ -2,26 +2,15 @@
   <div class="folder-modal" v-if="showFolderModal">
     <div class="folder-modal-content rounded-xl">
       <span class="close" @click="closeFolderModal">&times;</span>
-      <!-- 
-      <div v-for="photo in photosData" :key="photo.id">
-        <label>hi</label>
-        <img class="img m-8 rounded-md w-5/6" ref="image" :src="blobUrl + photo.id" @load="loaded" />
-      </div> -->
 
       <div class="input-fields flex items-center w-full justify-around gap-4">
-        <InputField v-model="inputFields" @input="handleDataFromInput" />
-        <!-- <InputField  @input="handleDataFromInput" /> -->
-        <!-- <InputField @input="$refs." /> -->
-        
-        <p>Value in ParentComponent: {{ this.inputFields.data  }}</p>
-        <!-- <p>Value in ParentComponent: {{ this.$refs.inpField }}</p> -->
-        
-        
-        <!-- <input v-model="message" placeholder="edit me" /> -->
+   
+        <InputField @input="updateInputValue" />
+
+        <p>Value in ParentComponent: {{ this.inputValue  }}</p>
 
         <ShineButton />
       </div>
-
 
     </div>
   </div>
@@ -29,20 +18,14 @@
   
 <script>
 import axios from "axios"
-// import { InputField } from "@/components/inputField.vue";
 
 export default {
 
-  components: {
-    // InputField,
-  },
-  
   data() {
     return {
       showFolderModal: false,
       inputValue: '',
       inputFields: '',
-
       photosData: [],
       blobUrl: ('http://localhost:80/getFile/'),
     };
@@ -50,16 +33,9 @@ export default {
 
   methods: {
 
-    handleDataFromInput(data) {
-      // console.log(data)
-      this.inputFields = data;
-      console.log("W", this.inputFields)
+    updateInputValue(event) {
+      this.inputValue = event.target.value;
     },
-
-    // emitInputValue(event) {
-    //   console.log(this.inputValue)
-    //   this.$emit('input', this.inputValue);
-    // },
 
     async getPhotosData() {
       try {
@@ -95,24 +71,15 @@ export default {
       }
     },
 
-    // updateInputValue(value) {
-    //   this.$refs.emitInputValue = value;
-    // },
-
-    // getInputValue() {
-    //   this.inputFields = this.inputFields.emitInputValue;
-    // },
+    addFolder() {
+      
+    }
 
   },
 
   mounted() {
     this.getPhotosData();
   },
-
-  
-
-
-
 
 };
 </script>
@@ -142,7 +109,14 @@ export default {
   }
 
   .input-fields {
-    /* margin: -80px 0 0 0; */
+   
+    p {
+      max-width: 10vw;
+      overflow: hidden;
+      word-break: break-all;
+      white-space: normal;
+      
+    }
   }
 
 }

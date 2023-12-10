@@ -1,9 +1,15 @@
 <template>
   <div class="inputGroup">
+    <input type="text" required autocomplete="off" @focus="isFocused = true"
+      @blur="isFocused = false"/>
+    <label :for="labelFor" :class="{ 'labelActive': isFocused || inputValue }">{{ label }}</label>
+  </div>
+
+  <!-- <div class="inputGroup">
     <input type="text" required autocomplete="off" :value="inputValue"  @focus="isFocused = true"
       @blur="isFocused = false" @input="updateInputValue" />
     <label :for="labelFor" :class="{ 'labelActive': isFocused || inputValue }">{{ label }}</label>
-  </div>
+  </div> -->
 </template>
   
 <script>
@@ -12,7 +18,7 @@ export default {
 
   data() {
     return {
-      inputValue: this.value || '',
+      // inputValue: this.value || '',
       isFocused: false,
       label: "Name",
       labelFor: "name", // Make sure to match the input's id
@@ -22,14 +28,10 @@ export default {
 
 
   methods: {
-    // emitInputValue(event) {
-    //   console.log(this.inputValue)
+    // updateInputValue(event) {
+    //   this.inputValue = event.target.value;
     //   this.$emit('input', this.inputValue);
     // },
-    updateInputValue(event) {
-      this.inputValue = event.target.value;
-      this.$emit('input', this.inputValue);
-    },
   },
 
 };

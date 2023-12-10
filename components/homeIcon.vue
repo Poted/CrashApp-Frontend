@@ -1,6 +1,6 @@
-<template>
+<!-- <template>
     <div>
-      <!-- Your SVG code goes here -->
+      Your SVG code goes here
       <svg
         baseProfile="tiny"
         height="24px"
@@ -26,4 +26,4 @@
   <style scoped>
   /* Add any additional styles if needed */
   </style>
-  
+   -->
