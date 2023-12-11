@@ -3,14 +3,15 @@
     <div class="folder-modal-content rounded-xl">
       <span class="close" @click="closeFolderModal">&times;</span>
 
-      <div class="input-fields flex items-center w-full justify-around gap-4">
-   
-        <InputField @input="updateInputValue" />
+      <div class="input-fields flex flex-col items-center w-full justify-around gap-1">
 
-        <p>Value in ParentComponent: {{ this.inputValue  }}</p>
+        <InputField @input="updateInputValue" :maxlength="30" />
 
-        <ShineButton />
+        <p v-if="this.inputValue.length <= 30">Folder name: {{ this.inputValue }}</p>
+        <p v-if="this.inputValue.length > 30">Folder name should contains less than 30 characters.</p>
+
       </div>
+      <ShineButton text="create folder" />
 
     </div>
   </div>
@@ -25,7 +26,6 @@ export default {
     return {
       showFolderModal: false,
       inputValue: '',
-      inputFields: '',
       photosData: [],
       blobUrl: ('http://localhost:80/getFile/'),
     };
@@ -71,8 +71,20 @@ export default {
       }
     },
 
-    addFolder() {
-      
+    async saveoreditFolder() {
+      try {
+
+        const saveoreditFolder = await axios.post(`http://localhost:80/saveOrEdit}`);
+        if (response.status === 200) {
+          console.log('Data updated successfully');
+        }
+        else {
+          console.error('Failed to update data');
+        }
+      }
+      catch (error) {
+        console.error('An error occurred while updating data:', error);
+      }
     }
 
   },
@@ -109,13 +121,11 @@ export default {
   }
 
   .input-fields {
-   
+
     p {
-      max-width: 10vw;
-      overflow: hidden;
+      margin: 1vw;
       word-break: break-all;
       white-space: normal;
-      
     }
   }
 
