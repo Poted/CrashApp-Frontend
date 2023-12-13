@@ -8,9 +8,16 @@
         <ul>
           <li v-for="(folder, index) in this.foldersData" :key="index">
 
-            <div class="folder-name">
-              {{ folder.name || 'No name available' }}
-            </div>
+            <nuxt-link :to="'/strg/f/' + folder.id" v-if="folder.name != 'main'">
+              <div class="folder-name">
+                {{ folder.name || 'No name available' }}
+              </div>
+            </nuxt-link>
+            <nuxt-link :to="'/strg'" v-else>
+              <div class="folder-name">
+                {{ folder.name || 'No name available' }}
+              </div>
+            </nuxt-link>
 
           </li>
         </ul>
