@@ -1,17 +1,18 @@
 <template>
   <div class="inputGroup">
     <input type="text" required autocomplete="off" @focus="isFocused = true"
-      @blur="isFocused = false" :maxlength="maxlength"/>
+      @blur="isFocused = false" maxlength=30 v-model="inputValue"/>
     <label :for="labelFor" :class="{ 'labelActive': isFocused || inputValue }">{{ label }}</label>
   </div>
 </template>
   
 <script>
 export default {
-  props: ['value'],
+  // props: ['value'],
 
   data() {
     return {
+      inputValue: '',
       isFocused: false,
       label: "Name",
       labelFor: "name",
@@ -25,8 +26,9 @@ export default {
 .inputGroup {
   font-family: 'Segoe UI', sans-serif;
   margin: 1em 0 1em 0;
-  max-width: 190px;
+  /* max-width: 190px; */
   position: relative;
+  width: 100%;
 }
 
 .inputGroup input {

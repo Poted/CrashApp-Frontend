@@ -3,15 +3,28 @@
     <div class="folder-modal-content rounded-xl">
       <span class="close" @click="closeFolderModal">&times;</span>
 
+      <div>
+        <h2>Names List:</h2>
+        <ul>
+          <li v-for="(folder, index) in this.foldersData" :key="index">
+
+            <div class="folder-name">
+              {{ folder.name || 'No name available' }}
+            </div>
+
+          </li>
+        </ul>
+      </div>
+
       <div class="input-fields flex flex-col items-center w-full justify-around gap-1">
 
-        <InputField @input="updateInputValue" :maxlength="30" />
+        <InputField @input="updateInputValue"/>
 
-        <p v-if="this.inputValue.length <= 30">Folder name: {{ this.inputValue }}</p>
-        <p v-if="this.inputValue.length > 30">Folder name should contains less than 30 characters.</p>
+        <p v-if="this.inputValue.length <= 29">Folder name: {{ this.inputValue }}</p>
+        <p v-if="this.inputValue.length > 29">Folder name should contains less than 30 characters.</p>
 
       </div>
-      <ShineButton text="create folder" />
+      <ShineButton text="create folder" @click="addFolder" />
 
     </div>
   </div>
@@ -26,8 +39,7 @@ export default {
     return {
       showFolderModal: false,
       inputValue: '',
-      photosData: [],
-      blobUrl: ('http://localhost:80/getFile/'),
+      foldersData: {},
     };
   },
 
@@ -37,11 +49,13 @@ export default {
       this.inputValue = event.target.value;
     },
 
-    async getPhotosData() {
+    async getFoldersData() {
       try {
-        const photosData = await axios.get(`http://localhost:80/filesList/`);
-        this.photosData = photosData.data;
-        if (photosData.status === 200) {
+
+        const foldersData = await axios.get(`http://localhost:80/getFolders`);
+        this.foldersData = foldersData.data;
+
+        if (foldersData.status === 200 || foldersData.status === 201) {
           console.log('Data fetched successfully');
         }
         else {
@@ -52,31 +66,46 @@ export default {
         console.error('An error occurred while fetching data:', error);
       }
 
+
     },
 
 
     openFolderModal() {
       this.showFolderModal = true;
-      document.addEventListener('keydown', this.closeModalOnEscape);
+      document.addEventListener('keydown', this.keyListeners);
     },
 
     closeFolderModal() {
       this.showFolderModal = false;
-      document.removeEventListener('keydown', this.closeModalOnEscape);
+      document.removeEventListener('keydown', this.keyListeners);
     },
 
-    closeModalOnEscape(event) {
+    keyListeners(event) {
       if (event.key === 'Escape') {
         this.closeFolderModal();
       }
+      
+      if (event.key === 'Enter') {
+        this.addFolder()
+      }
     },
 
-    async saveoreditFolder() {
+    async addFolder() {
+
+      const folderData = {
+        name: this.inputValue
+      }
+
       try {
 
-        const saveoreditFolder = await axios.post(`http://localhost:80/saveOrEdit}`);
-        if (response.status === 200) {
+        const response = await axios.post(`http://localhost:80/saveFolder`, folderData);
+        if (response.status === 201) {
           console.log('Data updated successfully');
+          
+          this.getFoldersData();
+          
+          this.inputValue = ''
+
         }
         else {
           console.error('Failed to update data');
@@ -90,7 +119,7 @@ export default {
   },
 
   mounted() {
-    this.getPhotosData();
+    this.getFoldersData();
   },
 
 };
@@ -113,11 +142,11 @@ export default {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 40%;
+  width: 50%;
 
   @media (max-width: 768px) {
     margin: 35% auto;
-    width: 80%;
+    width: 95%;
   }
 
   .input-fields {
@@ -127,6 +156,14 @@ export default {
       word-break: break-all;
       white-space: normal;
     }
+  }
+
+  .folder-name {
+    border: 1px solid black;
+    border-radius: 15px;
+    margin: 1vh 0 0 1vh;
+    padding: 10px;
+    width: 100%;
   }
 
 }

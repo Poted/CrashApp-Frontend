@@ -181,8 +181,9 @@ export default {
 }
 
 function calculatePosition(angle, radius) {
+
     const radians = (angle * Math.PI) / 450;
-    console.log(radians)
+    // console.log(radians)
 
     const x = Math.cos(radians) * parseInt(radius);
     const y = Math.sin(radians) * parseInt(radius);
