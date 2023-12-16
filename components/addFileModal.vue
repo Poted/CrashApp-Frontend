@@ -133,7 +133,7 @@ export default {
   },
 
   mounted() {
-    console.log(this.thumbnail)
+    // console.log(this.thumbnail)
   },
 
   // computed: {

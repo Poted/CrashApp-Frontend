@@ -5,27 +5,36 @@
 
       <div>
         <h2>Names List:</h2>
+        <!-- <nuxt-link :to="'/strg'">
+          <div class="folder-name folder-name flex items-center justify-between">
+            {{ 'Main' || 'No name available' }}
+            <DeleteButton @dblclick=" deleteFolder(folder.id)" class="deleteBtn invisible"/>
+          </div>
+        </nuxt-link> -->
+
         <ul>
           <li v-for="(folder, index) in this.foldersData" :key="index">
-
-            <nuxt-link :to="'/strg/f/' + folder.id" v-if="folder.name != 'main'">
-              <div class="folder-name">
-                {{ folder.name || 'No name available' }}
+            <nuxt-link :to="'/strg'" v-if="folder.name.toLowerCase() == 'main'">
+              <div class="folder-name folder-name flex items-center justify-between">
+                {{ 'Main' || 'No name available' }}
+                <DeleteButton @dblclick=" deleteFolder(folder.id)" class="deleteBtn invisible" />
               </div>
             </nuxt-link>
-            <nuxt-link :to="'/strg'" v-else>
-              <div class="folder-name">
-                {{ folder.name || 'No name available' }}
-              </div>
-            </nuxt-link>
-
+            <div class="folder-name flex items-center justify-between" v-else>
+              <nuxt-link :to="'/strg/f/' + folder.id" class="w-full">
+                <div>
+                  {{ folder.name || 'No name available' }}
+                </div>
+              </nuxt-link>
+              <DeleteButton @dblclick=" deleteFolder(folder.id)" class="deleteBtn w-full" />
+            </div>
           </li>
         </ul>
       </div>
 
       <div class="input-fields flex flex-col items-center w-full justify-around gap-1">
 
-        <InputField @input="updateInputValue"/>
+        <InputField @input="updateInputValue" />
 
         <p v-if="this.inputValue.length <= 29">Folder name: {{ this.inputValue }}</p>
         <p v-if="this.inputValue.length > 29">Folder name should contains less than 30 characters.</p>
@@ -47,6 +56,7 @@ export default {
       showFolderModal: false,
       inputValue: '',
       foldersData: {},
+      currentFolder: '',
     };
   },
 
@@ -91,7 +101,7 @@ export default {
       if (event.key === 'Escape') {
         this.closeFolderModal();
       }
-      
+
       if (event.key === 'Enter') {
         this.addFolder()
       }
@@ -105,12 +115,14 @@ export default {
 
       try {
 
+        console.log(folderData)
+
         const response = await axios.post(`http://localhost:80/saveFolder`, folderData);
         if (response.status === 201) {
           console.log('Data updated successfully');
-          
+
           this.getFoldersData();
-          
+
           this.inputValue = ''
 
         }
@@ -121,7 +133,27 @@ export default {
       catch (error) {
         console.error('An error occurred while updating data:', error);
       }
-    }
+    },
+
+    async deleteFolder(id) {
+      try {
+
+        const response = await axios.delete(`http://localhost:80/DeleteFolder/${id}`);
+        if (response.status === 204) {
+          console.log('Deleted successfully');
+        }
+        else {
+          console.error('Failed to delete data');
+        }
+      }
+      catch (error) {
+        console.error('An error occurred while deleting data:', error);
+      }
+
+      this.getFoldersData();
+    },
+
+
 
   },
 
@@ -172,6 +204,7 @@ export default {
     padding: 10px;
     width: 100%;
   }
+
 
 }
 

@@ -29,7 +29,8 @@ export default {
 <style scoped>
 .input__container {
   position: relative;
-  background: rgba(255, 255, 255, 0.664);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px rgba(106, 106, 106, 0.8) solid;
   padding: 10px 15px;
   display: flex;
   justify-content: center;

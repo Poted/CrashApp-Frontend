@@ -64,8 +64,11 @@ export default {
     methods: {
 
         async getPhotosData() {
+
+            
             try {
-                const photosData = await axios.get(`http://localhost:80/filesList/`);
+                const photosData = await axios.get(`http://localhost:80/filesList/1`);
+                console.log(photosData)
                 this.photosData = photosData.data;
                 if (photosData.status === 200) {
                     console.log('Data fetched successfully');
@@ -77,6 +80,7 @@ export default {
             catch (error) {
                 console.error('An error occurred while fetching data:', error);
             }
+            
         },
 
         async deleteFile(id) {
