@@ -34,7 +34,7 @@
 
       <div class="input-fields flex flex-col items-center w-full justify-around gap-1">
 
-        <InputField @input="updateInputValue" />
+        <InputField @input="updateInputValue" ref="inputField"/>
 
         <p v-if="this.inputValue.length <= 29">Folder name: {{ this.inputValue }}</p>
         <p v-if="this.inputValue.length > 29">Folder name should contains less than 30 characters.</p>
@@ -106,8 +106,11 @@ export default {
         this.addFolder()
       }
     },
-
+    
     async addFolder() {
+
+      this.$refs.inputField.clearInputValue();
+      this.inputValue = ''
 
       const folderData = {
         name: this.inputValue
@@ -115,15 +118,12 @@ export default {
 
       try {
 
-        console.log(folderData)
-
         const response = await axios.post(`http://localhost:80/saveFolder`, folderData);
         if (response.status === 201) {
           console.log('Data updated successfully');
 
           this.getFoldersData();
 
-          this.inputValue = ''
 
         }
         else {
@@ -133,9 +133,11 @@ export default {
       catch (error) {
         console.error('An error occurred while updating data:', error);
       }
+
     },
 
     async deleteFolder(id) {
+    
       try {
 
         const response = await axios.delete(`http://localhost:80/DeleteFolder/${id}`);
@@ -152,8 +154,6 @@ export default {
 
       this.getFoldersData();
     },
-
-
 
   },
 

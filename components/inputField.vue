@@ -8,7 +8,6 @@
   
 <script>
 export default {
-  // props: ['value'],
 
   data() {
     return {
@@ -18,6 +17,12 @@ export default {
       labelFor: "name",
     };
   },
+
+  methods: {
+    clearInputValue() {
+      this.inputValue = ''
+    },
+  }
 
 };
 </script>

@@ -4,21 +4,22 @@
       <span class="close" @click="closeModal">&times;</span>
 
       <div class="flex flex-col items-center mt-6">
-        <label v-if="selectedFile" class="w-72 h-80 text-center" for="fileInput">
-          <img v-if="thumbnail" :src="thumbnail" alt="Thumbnail" class="w-full"/>
+        <label v-if="selectedFile" class="w-72 h-80 text-center cursor-pointer" for="fileInput">
+          <img v-if="thumbnail" :src="thumbnail" alt="Thumbnail" class="w-full" />
           <span> {{ selectedFile.name }}</span>
         </label>
-        <NoData v-else @click="$refs.fileInput.click()" />
+        <NoData v-else @click="$refs.fileInput.click()" class="cursor-pointer"/>
         <input id="fileInput" class="invisible" type="file" ref="fileInput" @change="handleFileChange" />
 
         <ShineButton v-if="selectedFile" @click="uploadPhoto" text="Upload Photo" class="m-2" />
         <ShineButton v-else @click="this.$refs.fileInput.click()" text="Upload Photo" class="m-2" />
       </div>
+      <div>
+        <div>
+        </div>
+      </div>
     </div>
 
-
-    <!-- <input id="fileInput" class="invisible" type="file" ref="fileInput" @change="handleFileChange" /> -->
-    <!-- <ShineButton v-if="!selectedFile" @click="$refs.fileInput.click()" text="Choose File"/> -->
   </div>
 </template>
   
@@ -28,12 +29,13 @@ import axios from "axios"
 export default {
 
   data() {
+    const { folder_id } = useRoute().params;
     return {
+      folder_id: folder_id,
       selectedFile: null,
       showModal: false,
       thumbnail: null,
       tmbnl: null
-      // showInput: true,
     };
   },
 
@@ -100,7 +102,11 @@ export default {
 
         formData.append('file_name', body)
 
-        const response = await axios.post(`http://localhost:80/saveFile/`, formData);
+        if (!this.folder_id) {
+          this.folder_id = 1
+        }
+        
+        const response = await axios.post(`http://localhost:80/saveFile/` + this.folder_id, formData);
         if (response.status === 201) {
           console.log('Added successfully');
         }
@@ -121,6 +127,7 @@ export default {
     closeModal() {
       this.showModal = false;
       this.selectedFile = null;
+      this.$emit('modal-closed');
       document.removeEventListener('keydown', this.closeModalOnEscape);
     },
 
@@ -133,22 +140,14 @@ export default {
   },
 
   mounted() {
-    // console.log(this.thumbnail)
   },
 
-  // computed: {
-  //   isPies() {
-  //     return this.thumbnail;
-  //   }
-  // },
-
   watch: {
-    thumbnail (newVal, oldVal) {
-    if (!oldVal && newVal) {
-      console.log('bul changed to true: \n' + newVal, oldVal);
-      console.log('\n' + this.thumbnail)
+    thumbnail(newVal, oldVal) {
+      if (!oldVal && newVal) {
+        console.log('\nthumbnail' + this.thumbnail)
+      }
     }
-  }
   }
 
 };

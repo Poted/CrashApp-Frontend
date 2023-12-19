@@ -1,18 +1,18 @@
 <template>
     <div class="flex flex-col items-center">
 
-        <div class="buttons flex">
-        <!-- <div class="buttons grid gap-3 grid-cols-"> -->
+        <div class="buttons flex md:mb-8">
             <ShineButton class="flex-1 sm:mt-24 mt-32 sm:-mb-10 m-3" 
                                 @click="openModal" text="Upload Photo" />
-            <PhotoUploadModal ref="addFileModal" />
+            <PhotoUploadModal ref="addFileModal"/>
             
             <ShineButton class="flex-1 text-right w-48 sm:mt-24 mt-32 sm:-mb-10 m-3"
                                 @click="openFolderModal" text="Folders" />
             <FolderUploadModal ref="addFolderModal" />
+
         </div>
 
-        <NoData class="noDataStrg" v-if="photosData === 0" />
+        <NoData v-if="photosData == 0" class="noDataStrg"/>
         <div v-else class="grid grid-cols-2 sm:grid-cols-4 gap-1 sm:gap-4 m-4 p-0 sm:p-10">
             <div class="content h-60 h-full flex flex-col items-center justify-end rounded-xl text-white border-2 p-5 overflow-hidden"
                 v-for="photo in photosData" :key="photo.id">
@@ -65,10 +65,8 @@ export default {
 
         async getPhotosData() {
 
-            
             try {
                 const photosData = await axios.get(`http://localhost:80/filesList/1`);
-                console.log(photosData)
                 this.photosData = photosData.data;
                 if (photosData.status === 200) {
                     console.log('Data fetched successfully');
@@ -102,7 +100,6 @@ export default {
         openModal() {
             this.$refs.addFileModal.openModal()
         },
-
         
         openFolderModal() {
             this.$refs.addFolderModal.openFolderModal()
@@ -118,9 +115,6 @@ export default {
     mounted() {
         this.getPhotosData();
     },
-    watch() {
-        this.getPhotosData();
-    }
 
 }
 </script>
@@ -143,7 +137,9 @@ export default {
 }
 
 .noDataStrg {
-    margin: 5vh 0 15vh 0;
-    padding: 20vh 10vw 20vh 10vw;
+    // margin: 5vh 0 15vh 0;
+    // padding: 20vh 10vw 20vh 10vw;
+    height: 60vh;
+    margin: 5vh 0 0 0;
 }
 </style>
