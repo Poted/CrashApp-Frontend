@@ -1,28 +1,32 @@
 <template>
-    <div class="contactPage mt-24 w-96">
+    <div class="contact-page mt-24 w-96">
         <div class="contact-form flex flex-col p-12 dark-box">
+
+
+            <h1 class="header">
+                Our address
+            </h1>
 
             <div class="mb-8">
                 <h1>Address</h1>
                 <h2>Alcon Molina 51</h2>
                 <h1>City</h1>
                 <h2>Totana</h2>
+                <h1>Email</h1>
+                <h2>office@crashapp.com</h2>
             </div>
 
-            <h1>Contact Us</h1>
-            <form @submit.prevent="submitForm" class="flex flex-col">
-                <label for="name">Name:</label>
-                <input type="text" v-model="name" required />
+            <h1 class="header">
+                Contact Us
+            </h1>
 
-                <!-- <InputField></InputField> -->
+            <form @submit.prevent="submitForm" class="flex flex-col mt-2">
 
-                <label for="email">Email:</label>
-                <input type="email" v-model="email" required />
+                <InputField v-model="name" label="Name" :requiredField="true" :inputType="'text'" />
+                <InputField v-model="email" label="Email" :requiredField="true" :inputType="'email'" />
+                <InputField v-model="message" label="Message" :requiredField="true" :isTextArea="true" />
 
-                <label for="message">Message:</label>
-                <textarea v-model="message" required></textarea>
-
-                <ShineButton class="self-center mt-8">Send Email</ShineButton>
+                <ShineButton class="self-center">Send Email</ShineButton>
             </form>
         </div>
     </div>
@@ -41,7 +45,6 @@ export default {
     methods: {
 
         async submitForm() {
-            // Send email data to backend (you can use Axios or any other HTTP library)
             try {
                 await this.$axios.post('/api/sendEmail', {
                     name: this.name,
@@ -49,34 +52,37 @@ export default {
                     message: this.message,
                 });
 
-                // Optionally, you can display a success message or redirect the user
                 console.log('Email sent successfully!');
             } catch (error) {
                 console.error('Error sending email:', error);
-                // Handle error, display an error message, or redirect the user
             }
         },
     },
 };
 </script>
 
-<style>
+<style lang="scss">
+.contact-page {
 
-    .contactPage{
-
-        h1 {
-            font-weight: 700;
-            color: blanchedalmond;
-            text-decoration: underline;
-        }
-
-        .contact-form {
-            input, textarea {
-                padding: 2px 5px 3px 5px;
-                color: black;
-            }
+    .contact-form {
+        .header {
+            font-size: 30px;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 2px solid white;
+            border-radius: 15px;
+            padding: 10px 0 15px 0;
+            background-color: rgba(1, 1, 1, 0.2);
         }
     }
 
+    h1 {
+        font-weight: 700;
+        color: blanchedalmond;
+        text-decoration: underline;
+    }
+
+}
 </style>
   

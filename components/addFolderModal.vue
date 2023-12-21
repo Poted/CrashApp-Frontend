@@ -109,14 +109,17 @@ export default {
     
     async addFolder() {
 
-      this.$refs.inputField.clearInputValue();
-      this.inputValue = ''
-
+      
       const folderData = {
         name: this.inputValue
       }
+      
+      this.$refs.inputField.clearInputValue();
+      this.inputValue = ''
 
       try {
+
+        console.log("name: " + folderData + " xd")
 
         const response = await axios.post(`http://localhost:80/saveFolder`, folderData);
         if (response.status === 201) {

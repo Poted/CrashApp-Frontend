@@ -20,16 +20,15 @@
                         <img src="blob:url" alt="">
                     </div>
 
-                    <div  v-for="photo in photosData" :key="photo.id">
+                    <div v-for="photo in photosData" :key="photo.id">
 
                         <div class="item white-box">
-                        <h1>Crashpads</h1>
-                        <img src="blob:url" alt="">
-                    </div>    
-                        
+                            <h1>Crashpads</h1>
+                            <img src="blob:url" alt="">
+                        </div>
+
                     </div>
 
-                    
                     <div class="item white-box">
                         <h1>Chalkbags</h1>
                         <img src="blob:url" alt="">
@@ -114,18 +113,19 @@ export default {
             blobUrl: ('http://localhost:80/getFile/'),
         }
     },
+    
     methods: {
         changeContent() {
-
             this.isChanged = !this.isChanged;
         },
+    
+        
     },
 
 }
 </script>
   
 <style lang="scss">
-
 .landing-page {
 
     .call-to-action {
@@ -140,7 +140,7 @@ export default {
             }
 
             .fade-out {
-                animation: fadeOut 1s ease-out;
+                animation: fadeOut 0s ease-out;
                 visibility: hidden;
 
                 @keyframes fadeOut {
@@ -233,5 +233,4 @@ export default {
 
 
 }
-
 </style>

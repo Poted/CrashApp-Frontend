@@ -9,7 +9,7 @@
           <span> {{ selectedFile.name }}</span>
         </label>
         <NoData v-else @click="$refs.fileInput.click()" class="cursor-pointer"/>
-        <input id="fileInput" class="invisible" type="file" ref="fileInput" @change="handleFileChange" />
+        <input id="fileInput" class="invisible" type="file" ref="fileInput" @change="handleFileChange"/>
 
         <ShineButton v-if="selectedFile" @click="uploadPhoto" text="Upload Photo" class="m-2" />
         <ShineButton v-else @click="this.$refs.fileInput.click()" text="Upload Photo" class="m-2" />

@@ -4,20 +4,18 @@
 
             <div class="circle-container">
                 <img ref="image" @click="showOptions" src="../public/CrashAppLogo.png" @load="loaded" />
-                <!-- <img ref="image" @click="showOptions" :src="blobUrl" @load="loaded" /> -->
                 <div class="circle">
 
 
                     <transition name="bounce" @after-enter="startButtonAnimation">
                         <div v-if="showContent" class="elements">
 
-                            <!-- <ItalicSearchBar v-if="isFirstItem" :animated="buttonAnimated" /> -->
 
                             <div v-for="(item, index) in iconNames" :key="index" class="circle-item"
                                 :style="getItemStyle(index)">
 
                                 <template v-if="index == 0">
-                                    <nuxt-link @click="showContent = !showContent" :to="getIconHref(item.src)">
+                                    <nuxt-link @click="iconClick(item.src)" :to="getIconHref(item.src)">
                                         <img :src="getIconSrc(item.name)" alt="i">
                                     </nuxt-link>
                                     <div>
@@ -36,7 +34,7 @@
                                     </a>
                                 </template>
                                 <template v-else>
-                                    <nuxt-link @click="showContent = !showContent" :to="getIconHref(item.src)">
+                                    <nuxt-link @click="iconClick(item.src)" :to="getIconHref(item.src)">
                                         <img :src="getIconSrc(item.name)" alt="i">
                                     </nuxt-link>
                                 </template>
@@ -46,34 +44,6 @@
                         </div>
                     </transition>
 
-
-
-
-
-
-
-
-
-
-
-
-
-                    <!-- <ItalicSearchBar class="w-96"/> -->
-                    <!-- 
-                    <transition name="bounce">
-                        <div v-if="showContent" class="elements">
-
-                            <div v-for="(item, index) in iconNames" :key="index" class="circle-item"
-                                :style="getItemStyle(index)">
-
-                                <nuxt-link @click="showContent = !showContent" :to="getIconHref(item.src)">
-                                    <img :src="getIconSrc(item.name)" alt="i">
-                                </nuxt-link>
-
-                            </div>
-
-                        </div>
-                    </transition> -->
                 </div>
             </div>
 
@@ -88,11 +58,6 @@ export default {
     data() {
         return {
 
-            // blobUrl: ('http://localhost:80/getFile/' + 'b03767fd-a361-47e3-912a-3d386f31ec8d'),
-            // blobUrl: ("../public/1328245.jpeg"),
-    // background-image: url(../public/1328245.jpeg);
-            
-
             iconNames: [
                 { name: 'home', src: '' },
                 { name: 'boulder', src: 'findYourCrashpad' },
@@ -102,7 +67,8 @@ export default {
                 { name: 'instagram' }
             ],
 
-            items: [, '2', '3', '4', '5', '6'],
+            // items: [, '2', '3', '4', '5', '6'],
+            // items: ['1', '2', '3', '4', '5', '6'],
             showContent: false,
             buttonAnimated: false,
 
@@ -127,15 +93,23 @@ export default {
             }
         },
 
-        scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth',
-            });
+        iconClick(itemsrc) {
+            this.showContent = !this.showContent
+            console.log(itemsrc)
+
+            const currentUrl = window.location.href;
+
+            if (currentUrl.includes(itemsrc)) {   
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth',
+                });
+            }
         },
 
         getItemStyle(index) {
-            const totalItems = this.items.length;
+            // const totalItems = this.items.length;
+            const totalItems = this.iconNames.length;
             const angle = (360 / totalItems) * index - 22;
             // const angle = (360 / totalItems) * index;
             const radius = '100px';
