@@ -64,11 +64,11 @@ export default {
 .inputGroup {  
 
   font-family: 'Segoe UI', sans-serif;
-  margin: 1em 0 1em 0;
+  margin: 0.5em 0 0.5em 0;
   position: relative;
 
   input, textarea {
-    font-size: 100%;
+    font-size: 100%; 
     padding: 0.8em;
     outline: none;
     border: 2px solid rgb(200, 200, 200);
@@ -114,28 +114,44 @@ export default {
     background-color: rgba(1, 1, 1, 0.2);
     border-color: violet;
   }
-
-
+  
+  
   textarea::-webkit-scrollbar {
-    width: 12px;
+    width: 15px;
+    border-radius: 15px;
+  }
+
+  
+  textarea::-webkit-resizer {
+    background-color: violet;
+    border-bottom-right-radius: 10px;
+    
+  }
+  
+  textarea::-webkit-scrollbar-track-piece {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 20px;
   }
   
   textarea::-webkit-scrollbar-track {
-    border-radius: 3px;
+    border-radius: 15px;
     background: #f1f1f1; 
-    margin-top: 15px;
+    margin-top: 10px;
+    background-color: rgb(36, 36, 36, 0.1);
   }
   
   textarea::-webkit-scrollbar-thumb {
-    background-color: #888;
+    background-color: violet;
+    cursor: pointer;
     border-radius: 3px;
   }
   
   textarea::-webkit-scrollbar-thumb:hover {
-  background-color: #555; 
-}
-
-
+    background-color: #555; 
+  }
+  
+  
 }
 
 

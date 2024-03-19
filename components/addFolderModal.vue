@@ -69,7 +69,9 @@ export default {
     async getFoldersData() {
       try {
 
-        const foldersData = await axios.get(`http://localhost:80/getFolders`);
+        const foldersData = await axios.get(`http://localhost:80/getFolders`, {
+          headers: { "Access-Control-Allow-Origin": "*", 'Access-Control-Allow-Headers': '*', },
+        });
         this.foldersData = foldersData.data;
 
         if (foldersData.status === 200 || foldersData.status === 201) {
