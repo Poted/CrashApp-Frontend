@@ -1,19 +1,32 @@
 <template>
-  <!-- <div class="crashpads-container"> -->
-  <div class="crashpads-container grid md:grid-cols-4 grid-cols-1 gap-2 sm:gap-8">
 
-    <CrashpadsSelectMenu
-      v-for="(crashpad, index) in crashpads"
-      :key="index"
-      :name="crashpad.name"
-      :description="crashpad.description"
-      :price="crashpad.price"
-      :selected="crashpad.selected"
-      :image-src="crashpad.imageSrc"
-    />
-  
-  </div>
-  </template>
+  <div class="menu-container">
+    
+    <div class="calendar-container">
+      <Calendar/>
+    </div>    
+
+      <InputField class="input-field" label="Day"/>
+      <InputField class="input-field" label="Day"/>
+      <InputField class="input-field" label="Day"/>
+      <PhoneInput class="input-field" />    
+
+      <div class="crashpads-container grid md:grid-cols-4 grid-cols-1 gap-2 sm:gap-8">
+        
+        
+        <CrashpadsSelectMenu
+        v-for="(crashpad, index) in crashpads"
+        :key="index"
+        :name="crashpad.name"
+        :description="crashpad.description"
+        :price="crashpad.price"
+        :selected="crashpad.selected"
+        :image-src="crashpad.imageSrc"
+        />
+        
+      </div>
+    </div>
+</template>
   
   <script>
 
@@ -52,14 +65,67 @@
   </script>
   
   <style scoped lang="scss">
-  
-  .crashpads-container {
-    position: absolute;
-    top: 10%;
-    width: 80vw;
-    transform: translateX(-50%);
-      
 
+ .menu-container {
+   
+   display: flex;
+   flex-direction: column;
+   width: 80vw;
+   margin-top: 5vh;
+
+  
+  @media (max-width: 467px) {
+    margin-top: 11vh;
+  }
+
+   
+   .input-field {
+      align-self: center;
+      width: 40%;
+      z-index: 1;
+      background-color: rgba($color: #000000, $alpha: 0.7);
+      border-radius: 20px;
+      color: whitesmoke;
+      font-size: large;
+
+      @media (min-width: 768px) and (max-width: 1199px) {
+        width: 80%;
+      }
+
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+    }
+
+
+    .calendar-container {
+
+      height: 45vh;
+      display: flex;
+      flex-direction: column;
+      // margin-bottom: -5vh;
+      
+      @media (max-width: 768px) {
+        margin-bottom: -5vh;
+      }
+
+      @media (min-width: 768px) and (max-width: 1199px) {
+        height: 35vh;
+      }
+      
+      .calendar {
+        align-self: center;        
+      }
+    }  
+    
+    .crashpads-container {
+      margin: 6vh 0 5vh 0;
+
+      @media (max-width: 467px) {
+        // width: 95%;
+        align-self: center;
+      }
+    }
   }
     </style>
   

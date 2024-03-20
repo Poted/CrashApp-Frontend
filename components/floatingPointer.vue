@@ -200,6 +200,12 @@ function calculatePosition(angle, radius) {
             width: 30vw;
         }
 
+        
+        @media (max-width: 932px) and (orientation: landscape) {
+            margin: -2vh 0vw 0 -2vw;
+            width: 12vw;
+        }
+
         /* For tablet screens with a width between 768px and 1199px */
         @media (min-width: 768px) and (max-width: 1199px) {
             width: 12vw;
@@ -227,7 +233,7 @@ function calculatePosition(angle, radius) {
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
-                justify-content: center;
+                // justify-content: center;
                 height: 1px;
                 width: 1px;
                 top: -4.7rem;
@@ -256,12 +262,16 @@ function calculatePosition(angle, radius) {
 
                     .isb {
                         position: fixed;
-                        width: 27.5vw !important;
-                        margin: 0vh 0 0 5vw;
+                        margin: 12vh 0 0 8vw;
+                        left: 0;
+                        width: 100%;
 
-                        @media screen and (max-width: 646px) {
-                            width: 100% !important;
-                            margin: 20vh 0 0 -35vw;
+                        @media screen and (max-width: 646px)  {
+                            margin: 17vh 0 0 5vw;
+                        }
+
+                        @media screen and (max-width: 467px) and (max-height: 800px) {
+                            margin: 22vh 0 0 0;
                         }
 
                     }
@@ -274,11 +284,14 @@ function calculatePosition(angle, radius) {
                 }
 
                 .bounce-enter-active {
-                    animation: bounce-in .4s;
+                    animation: bounce-in .3s;
+                    .isb {
+                        
+                    }
                 }
 
                 .bounce-leave-active {
-                    animation: bounce-in .4s reverse;
+                    animation: bounce-in .3s reverse;
                 }
 
                 @keyframes bounce-in {

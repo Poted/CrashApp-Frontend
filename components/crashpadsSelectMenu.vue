@@ -9,11 +9,13 @@
         <p>{{ description }}</p>
         <p>Price: ${{ price }}/day</p>
         <p v-if="selected">Selected!</p>
+        <IconButton>Rent!</IconButton>
       </div>
     </div>
   </template>
   
   <script>
+
   export default {
     props: {
       name: String,
@@ -36,17 +38,9 @@
       border: 1px solid #ccc;
       cursor: pointer;
       width: 100%;
-      // min-height: fit-content;
       display: flex;
-      // flex-wrap: wrap;
-      // align-content: space-between;
       flex-direction: column;
-      // min-height: 100%;
 
-      @media (max-width: 768px) {
-        // height: 20vh;
-
-      }
 
       .crashpad-image {
         height: 20rem;
