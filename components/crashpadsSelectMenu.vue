@@ -9,7 +9,6 @@
         <p>{{ description }}</p>
         <p>Price: ${{ price }}/day</p>
         <p v-if="selected">Selected!</p>
-        <IconButton>Rent!</IconButton>
       </div>
     </div>
   </template>

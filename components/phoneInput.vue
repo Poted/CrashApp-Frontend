@@ -1,12 +1,12 @@
 <template>
   <div class="ui-wrapper">
     <input v-for="(country, index) in countries" :key="index" :id="country.id" name="flag" type="radio">
-    <input class="dropdown-checkbox" name="dropdown" id="dropdown" type="checkbox">
-    <label class="dropdown-container" for="dropdown"></label>
-    <div class="input-wrapper">
+    <input @blur="closeDropdown" class="dropdown-checkbox" name="dropdown" id="dropdown" type="checkbox">
+    <label @click="openDropdown" class="dropdown-container" for="dropdown"></label>
+    <div class="input-wrapper" >
       <legend>
         <label for="phonenumber">
-          Phonenumber*
+          Phonenumber
         </label>
       </legend>
       <div class="textfield">
@@ -14,7 +14,8 @@
         <span class="invalid-msg">This is not a valid phone number</span>
       </div>
     </div>
-    <div class="select-wrapper">
+    <div  v-if="bul" class="select-wrapper">
+      <!-- <ul > -->
       <ul>
         <li v-for="(country, index) in countries" :key="index" :class="country.id">
           <label :for="country.id"><span>{{ country.flag }}</span>{{ country.name }}</label>
@@ -26,8 +27,13 @@
 
 <script>
 export default {
+
+  
   data() {
     return {
+      
+      bul: true,
+
       countries: [
         { id: 'Austria', name: 'Austria', flag: '🇦🇹' },
         { id: 'Belgium', name: 'Belgium', flag: '🇧🇪' },
@@ -61,22 +67,40 @@ export default {
         { id: 'Sweden', name: 'Sweden', flag: '🇸🇪' }
       ]
     };
+  },
+  methods: {
+    
+    
+    openDropdown() {
+      console.log("1: " + this.bul)
+        this.bul = true; // Set bul to true when the input is focused
+        console.log("2: " + this.bul)
+
+      },
+      closeDropdown() {
+        // Delay setting bul to false to allow click events to propagate
+        setTimeout(() => {
+          this.bul = false; // Set bul to false when the input loses focus
+        }, 2);
+    }
+    
   }
+  
 };
 </script>
 
 <style scoped>
 .ui-wrapper {
   --width: 250px;
-  --height: 50px;
+  --height:60px;
   --background: #383535;
   --text-color: rgb(255, 255, 255);
-  --border-color: rgb(185, 184, 184);
-  --border-focus-color: rgb(74, 75, 77);
+  --border-color:  violet;
+  --border-focus-color: rgb(185, 184, 184);
   --shadow-color: rgba(32, 34, 36, 0.2);
   --shadow-focus-color: rgba(0, 110, 255, 0.2);
   --dropdown-button-color: #292727;
-  --dropdown-button-hover-color: ##292727;
+  --dropdown-button-hover-color: #292727;
 }
 
 .ui-wrapper *,
@@ -96,7 +120,7 @@ export default {
   display: inline-flex;
   border-radius: 10px;
   position: relative;
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
   background-color: var(--background);
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
@@ -111,6 +135,7 @@ export default {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  margin-top: 2vh;
 }
 
 .ui-wrapper>input {
@@ -170,6 +195,7 @@ export default {
   -webkit-transition: .2s;
   -o-transition: .2s;
   transition: .2s;
+  
 }
 
 .select-wrapper ul {

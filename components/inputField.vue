@@ -9,7 +9,7 @@
     
 
     <input v-else :type="inputType" :required="requiredField" autocomplete="off" @focus="isFocused = true"
-      @blur="isFocused = false" maxlength=30 v-model="inputValue"/>
+      @blur="isFocused = false" maxlength=60 v-model="inputValue"/>
     <label :class="{ 'labelActive': isFocused || inputValue }">{{ label }}</label>
     <!-- <label :for="labelFor" :class="{ 'labelActive': isFocused || inputValue }">{{ label }}</label> -->
   </div>

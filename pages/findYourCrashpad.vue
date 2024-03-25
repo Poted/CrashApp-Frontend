@@ -6,9 +6,10 @@
       <Calendar/>
     </div>    
 
-      <InputField class="input-field" label="Day"/>
-      <InputField class="input-field" label="Day"/>
-      <InputField class="input-field" label="Day"/>
+      <InputField class="input-field" label="Dzien dobry Pan Legoss!"/>
+      <InputField class="input-field" label="Your name"/>
+      <InputField class="input-field" label="City"/>
+      <InputField class="input-field" label="ID"/>
       <PhoneInput class="input-field" />    
 
       <div class="crashpads-container grid md:grid-cols-4 grid-cols-1 gap-2 sm:gap-8">
@@ -39,6 +40,7 @@
       description: String,
       price: Number,
     },
+
     data() {
       return {
         selected: false,
@@ -55,12 +57,7 @@
 
     };
     },
-    methods: {
-      selectCrashpad() {
-        this.selected = !this.selected;
-        this.$emit('select-crashpad', this.id, this.selected);
-      },
-    },
+    
   };
   </script>
   
@@ -73,6 +70,11 @@
    width: 80vw;
    margin-top: 5vh;
 
+   
+  @media (max-width: 768px) {
+    margin-top: 11vh;
+    width: 95vw;
+  }
   
   @media (max-width: 467px) {
     margin-top: 11vh;
