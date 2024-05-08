@@ -6,7 +6,6 @@
       <Calendar/>
     </div>    
 
-      <InputField class="input-field" label="Dzien dobry Pan Legoss!"/>
       <InputField class="input-field" label="Your name"/>
       <InputField class="input-field" label="City"/>
       <InputField class="input-field" label="ID"/>
