@@ -13,7 +13,8 @@
         </nuxt-link> -->
 
         <ul>
-          <li v-for="(folder, index) in this.foldersData" :key="index">
+          <li v-for="(folder, index) in this.foldersData.data" :key="index">
+
             <nuxt-link :to="'/strg'" v-if="folder.name.toLowerCase() == 'main'">
               <div class="folder-name folder-name flex items-center justify-between">
                 {{ 'Main' || 'No name available' }}
@@ -26,7 +27,7 @@
                   {{ folder.name || 'No name available' }}
                 </div>
               </nuxt-link>
-              <DeleteButton @dblclick=" deleteFolder(folder.id)" class="deleteBtn w-full" />
+              <DeleteButton @dblclick=" deleteFolder(folder[0].id)" class="deleteBtn w-full" />
             </div>
           </li>
         </ul>
@@ -69,7 +70,7 @@ export default {
     async getFoldersData() {
       try {
 
-        const foldersData = await axios.get(`http://localhost:80/getFolders`, {
+        const foldersData = await axios.get(`http://localhost:80/foldersList/018f5016-2a02-71b0-9305-74ae1464e75a`, {
           headers: { "Access-Control-Allow-Origin": "*", 'Access-Control-Allow-Headers': '*', },
         });
         this.foldersData = foldersData.data;
