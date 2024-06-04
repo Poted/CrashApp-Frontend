@@ -68,6 +68,7 @@ export default {
             try {
                 const photosData = await axios.get(`http://localhost:80/filesList/018f8db8-56f1-7805-95f0-3899f0732fc0`);
                 this.photosData = photosData.data;
+                console.log("this.photosData")
                 console.log(this.photosData.data[0])
                 if (photosData.status === 200) {
                     console.log('Data fetched successfully');

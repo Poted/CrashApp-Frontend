@@ -16,6 +16,8 @@
           <li v-for="(folder, index) in this.foldersData.data" :key="index">
 
             <nuxt-link :to="'/strg'" v-if="folder.name.toLowerCase() == 'main'">
+
+
               <div class="folder-name folder-name flex items-center justify-between">
                 {{ 'Main' || 'No name available' }}
                 <DeleteButton @dblclick=" deleteFolder(folder.id)" class="deleteBtn invisible" />
